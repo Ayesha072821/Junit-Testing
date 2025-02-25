@@ -20,9 +20,9 @@ public class CalculatorTest {
     @Test
     public void addition()
     {
-        int result = underTest.add(2,3);
+        double result = underTest.add(2,3);
         
-        assertEquals(5,result);
+        assertEquals(5,result,"Verify basic addition and result should be five");
     }
     
     
@@ -49,4 +49,26 @@ public class CalculatorTest {
         assertFalse(result);
     }
     
+    
+    //assertNull
+    //assertNotNull
+    
+    @Test
+    public void divideByZero(){
+       
+        IllegalArgumentException e= assertThrows(IllegalArgumentException.class,() ->
+                {
+                    underTest.divide(6, 0);
+                });
+        assertEquals("Cannot divide by zero!",e.getMessage());
+    }
+    
+    
+    @Test
+    void divideNonZero()
+    {
+        Double result=underTest.divide(9, 3);
+        assertNotNull(result);
+        assertEquals(3,result);
+    }
 }
