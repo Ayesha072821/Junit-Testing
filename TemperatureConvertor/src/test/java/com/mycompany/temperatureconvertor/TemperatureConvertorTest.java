@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  *
@@ -26,20 +28,36 @@ public class TemperatureConvertorTest {
     
     
     //Test to check the conversion from farenhiet to celcius
-    @Test
+  
     
-    public void convertToCelcius()
+    
+    
+    @ParameterizedTest
+    @CsvSource({
+        "25.0,77.0",
+        "100.0,212.0",
+        "0.0,32.0"
+        
+    })
+    public void celciusToFarenhiet(double cel,double faren)
     {
-        assertEquals(0.0,temperature.farenheitToCelcius(32));
+        assertEquals(faren,temperature.celciusToFarenheit(cel));
+    
     }
     
     
-    @Test
-    public void convertToFarenhiet()
+     @ParameterizedTest
+    @CsvSource({
+        "77.0,25.0,",
+        "212.0,100.0",
+        "32.0,0.0"
+        
+    })
+    public void farenhietToCelcius(double faren,double cel)
     {
-        assertEquals(32.0,temperature.celciusToFarenheit(0.0));
-    }
+        assertEquals(cel,temperature.farenheitToCelcius(faren));
     
+    }
     
     @Test
     public void celciusToFarenheit_testexception()
